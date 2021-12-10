@@ -74,25 +74,29 @@ module.exports = async function (fastify, opts) {
             type: "object",
             properties: {
               rows: {
-                type: 'array',
-                items:{
-                  type: 'object',
-                  // required: ['id', 'title'],
+                type: "array",
+                items: {
+                  type: "object",
                   properties: {
-                    id: {type: 'integer'},
-                    title: {type: 'string'}
+                    id: { type: "integer" },
+                    title: { type: "string" },
                   },
-                }
-              }
-            }
+                },
+              },
+            },
           },
         },
       },
     },
     async function (req, reply) {
-      const res = await this.db("posts").select('id', 'title');
+      const res = await this.db("posts").select("id", "title");
 
       return { rows: res };
     }
   );
+
+  fastify.post("/posts", async (req, reply) => {
+    let res = await fastify.db('posts').insert(req.body)
+    return {body: req.body, res: res};
+  });
 };

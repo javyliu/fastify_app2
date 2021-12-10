@@ -54,7 +54,7 @@ fastify.ready(() => {
   // })
   
   
-
+  fastify.register(require('fastify-formbody'))
   // Do not touch the following lines
 
   // This loads all plugins defined in plugins
