@@ -34,35 +34,37 @@ module.exports = async function (fastify, opts) {
     // throw(new Error("hahahahahah----------------"))
     // const connection = await fastify.mysql.getConnection()
 
-    const [rows, fields] = await fastify.mysql.query("SELECT * FROM user");
+    // const [rows, fields] = await fastify.mysql.query("SELECT * FROM user");
     // connection.release()
-    return rows[0];
+    return await fastify.db.from('user');
 
     fastify.log.info("mysql: ", fastify.mysql);
     return "aksdjfa;ldksfjasdkfj";
   });
 
   fastify.get("/user/:id", async (req, reply) => {
-    const [rows, fields] = await fastify.mysql.execute(
-      "SELECT * FROM user WHERE id=?",
-      [req.params.id]
-      // function onResult (err, result) {
-      //   reply.send(err || result)
-      // }
-    );
-    return { rows: rows[0] };
+    // const [rows, fields] = await fastify.mysql.execute(
+    //   "SELECT * FROM user WHERE id=?",
+    //   [req.params.id]
+    //   // function onResult (err, result) {
+    //   //   reply.send(err || result)
+    //   // }
+    // );
+    return { rows: await fastify.db.from('user') };
   });
 
   fastify.get("/users", async function (req, reply) {
-    console.log(fastify.mysql);
+    // console.log(fastify.mysql);
     console.log("con:", this.con());
-    const connection = await fastify.mysql.getConnection();
-    const [rows, fields] = await connection.query({
-      sql: "select 1 as foo, 2 as foo",
-      rowsAsArray: true,
-    });
+    // const connection = await fastify.mysql.getConnection();
+    const rows = await fastify.db.from('posts')
+    //   {
+
+    //   sql: "select 1 as foo, 2 as foo",
+    //   rowsAsArray: true,
+    // });
     // connection.release()
-    return { rows: _.flatten(rows) };
+    return { rows: rows};
   });
 
   fastify.get(

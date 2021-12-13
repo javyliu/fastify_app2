@@ -21,10 +21,10 @@
     "fastify-cli": "^2.14.0",
     "fastify-formbody": "^5.2.0",
     "fastify-multipart": "^5.2.0",
-    "fastify-mysql": "^2.1.0",
     "fastify-plugin": "^3.0.0",
     "fastify-sensible": "^3.1.0",
-    "knex": "^0.95.14"
+    "knex": "^0.95.14",
+    "mysql2": "^2.3.3"
   },
   "devDependencies": {
     "tap": "^15.0.9"

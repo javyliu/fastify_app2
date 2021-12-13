@@ -20,7 +20,7 @@ module.exports = async function (fastify, opts) {
     //   }
     // )
     // return fields;
-    var [rows, fields] = await fastify.mysql.query("select * from user")
+    var rows = await fastify.db.from('posts')
     console.log(fastify.db)
     return {'this is an example2': rows}
   })
