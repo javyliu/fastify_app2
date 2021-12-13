@@ -5,7 +5,7 @@ module.exports = async function (fastify, opts) {
   // fastify.addHook("preHandler", async (request, reply) => {
   //   await fastify.auth([fastify.verifyJWTandLevel, fastify.verifyUserAndPassword]);
   // });
-
+  // fastify.initialConfig.ignoreTrailingSlash = true
   fastify.addHook("preHandler", fastify.auth([fastify.verifyJWTandLevel, fastify.verifyUserAndPassword], { relation: "and" }));
 
   fastify.get("/", async function (request, reply) {
@@ -36,7 +36,7 @@ module.exports = async function (fastify, opts) {
 
     // const [rows, fields] = await fastify.mysql.query("SELECT * FROM user");
     // connection.release()
-    return await fastify.db.from('user');
+    return await fastify.db.from("user");
 
     fastify.log.info("mysql: ", fastify.mysql);
     return "aksdjfa;ldksfjasdkfj";
@@ -50,21 +50,21 @@ module.exports = async function (fastify, opts) {
     //   //   reply.send(err || result)
     //   // }
     // );
-    return { rows: await fastify.db.from('user') };
+    return { rows: await fastify.db.from("user") };
   });
 
   fastify.get("/users", async function (req, reply) {
     // console.log(fastify.mysql);
     console.log("con:", this.con());
     // const connection = await fastify.mysql.getConnection();
-    const rows = await fastify.db.from('posts')
+    const rows = await fastify.db.from("posts");
     //   {
 
     //   sql: "select 1 as foo, 2 as foo",
     //   rowsAsArray: true,
     // });
     // connection.release()
-    return { rows: rows};
+    return { rows: rows };
   });
 
   fastify.get(
@@ -98,7 +98,7 @@ module.exports = async function (fastify, opts) {
   );
 
   fastify.post("/posts", async (req, reply) => {
-    let res = await fastify.db('posts').insert(req.body)
-    return {body: req.body, res: res};
+    let res = await fastify.db("posts").insert(req.body);
+    return { body: req.body, res: res };
   });
 };
